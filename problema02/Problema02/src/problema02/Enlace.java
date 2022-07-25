@@ -42,24 +42,24 @@ public class Enlace {
         return conn;
     }
     
-    public void insertarTrabajador(Estudiante estudiante) {  
-  
-        try{  
-            establecerConexion();
-            Statement statement = obtenerConexion().createStatement();
-            String data = String.format("INSERT INTO estudiante (cedula, nombre, correo, sueldo, mes) "
-                    + "values ('%s', '%s', '%s', '%.2f', '%s')", estudiante.obtenerNombre(), 
-                    estudiante.obtenerApellido(),estudiante.obtenerCalificacion1(),
-                    estudiante.obtenerCalificacion2(),
-                    estudiante.obtenerCalificacion3());
-            statement.executeUpdate(data);
-            obtenerConexion().close();
-        } catch (SQLException e) {  
-             System.out.println("Exception: insertarEstudiante");
-             System.out.println(e.getMessage());  
-             
-        }  
-    }
+//    public void insertarEstudiante(Estudiante estudiante) {  
+//  
+//        try{  
+//            establecerConexion();
+//            Statement statement = obtenerConexion().createStatement();
+//            String data = String.format("INSERT INTO estudiante (cedula, nombre, correo, sueldo, mes) "
+//                    + "values ('%s', '%s', '%s', '%.2f', '%s')", estudiante.obtenerNombre(), 
+//                    estudiante.obtenerApellido(),estudiante.obtenerCalificacion1(),
+//                    estudiante.obtenerCalificacion2(),
+//                    estudiante.obtenerCalificacion3());
+//            statement.executeUpdate(data);
+//            obtenerConexion().close();
+//        } catch (SQLException e) {  
+//             System.out.println("Exception: insertarEstudiante");
+//             System.out.println(e.getMessage());  
+//             
+//        }  
+//    }
     
     public ArrayList<Estudiante> obtenerDataEstudiante() {  
         ArrayList<Estudiante> lista = new ArrayList<>();
@@ -73,7 +73,7 @@ public class Enlace {
                 Estudiante estudiante = new Estudiante(rs.getString("nombre"),
                         rs.getString("apellido"), rs.getDouble("calificacion1"),
                         rs.getDouble("calificacion2"),rs.getDouble("calificacion3"));
-                
+                estudiante.establecerPromedio();
                 lista.add(estudiante);
             }
             
